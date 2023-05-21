@@ -1,0 +1,261 @@
+* {
+  /* 許多標籤都有預設的padding和margin，所以這裡先把所有element的padding & margin去除 */
+  padding: 0;
+  margin: 0;
+  /* box-sizing: border-box可以讓我們等一下設定width和height時
+       box的border+padding+content不超過設定值(content會自動設定成寬高減掉設定的padding和border)
+    */
+  box-sizing: border-box;
+  /* 把字體改成標楷體 */
+  font-family: DFkai-sb, sans-serif;
+}
+
+/* 因為h標籤預設會是粗體，這邊把它改成正常 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+/* ================================================== 導覽列 ====================================================== */
+/* 選取header標籤內div中class為top的element */
+header div.top {
+  padding: 1rem;
+  background-image: url(./images/background.png);
+
+  /* cover的特性是讓背景圖不重複且整個「不變形」、「寬高等比例」、「在必要時局部裁切」的鋪滿整個容器空間 */
+  background-size: cover;
+}
+
+header div.top h1 {
+  font-size: 2.5rem;
+}
+
+header div.top h3 {
+  font-size: 1rem;
+}
+
+header nav {
+  background-color: black;
+}
+
+/* 選取header標籤內nav中的ul標籤 */
+header nav ul {
+  /* 因為我們想要讓ul中的li變成橫向排列，所以我們把ul變成flex container，這樣li就會變成flex item */
+  display: flex;
+
+  /* 把li預設的黑點去掉 */
+  list-style-type: none;
+}
+
+/* 選取header標籤內nav標籤中的ul標籤中的li標籤 */
+header nav ul li {
+  /* 設定padding為上下0.8rem，左右2rem，這樣就不會擠在一起 */
+  padding: 0.8rem 2rem;
+}
+
+nav ul li a {
+  color: white;
+  /* text-decoration: none;是把a標籤預設的文字底線去掉 */
+  text-decoration: none;
+  font-size: 1.25rem;
+  /* 讓所有的改變過程都要0.3秒，時間函數是ease */
+  transition: all 0.3s ease;
+}
+
+/* 當游標移動到a標籤時文字變成黃色 */
+nav ul li a:hover {
+  color: yellow;
+}
+
+/* 選取header標籤內nav標籤中class為active的element */
+header nav .active {
+  /* 使導覽列中目前頁面的文字變色，讓使用者知道自己目前在哪個頁面 */
+  color: yellow;
+}
+
+/* ================================================== main部分 ====================================================== */
+main {
+  /* 因為要把section.left和section.right變成並排的，所以要把main變成flex container */
+  display: flex;
+  /* 因為希望在手機頁面也能自動排版所以設定wrap */
+  flex-wrap: wrap;
+}
+
+main.no-main {
+  /* 因為上面設定了所有main是flex container，但不希望這個main是flex container所以設定它的display是block */
+  display: block;
+}
+
+main section {
+  padding: 1rem;
+}
+
+main section.left {
+  /* flex-grow=1 flex-shrink=1 flex-basis=200px */
+  /* flex-grow=1意思是有多餘的空間的話它分到1分，flex-basis=200px的意思是它最少也要有200px的空間(寬度) */
+  flex: 1 1 200px;
+}
+
+section.left img {
+  /* 設定sction.left中img標籤的圖片寬度為section.left這個區塊的90%(只設定寬度所以高度會等比例縮放) */
+  width: 90%;
+}
+
+section.left h3 {
+  /* 因為h3離下面圖片太近，所以我們設定它的下方margin為1rem */
+  margin-bottom: 1rem;
+}
+
+section.left table {
+  /* 讓section.left table離上方文字遠一點 */
+  margin-top: 1rem;
+}
+
+section.left table.tr,
+td {
+  /* 讓section.left的table,tr,td都有0.25rem的padding，讓他們不要那麼擠 */
+  padding: 0.25rem;
+}
+
+main section.right {
+  /* flex-grow=4 flex-shrink=1 flex-basis=200px */
+  /* flex-grow=1意思是有多餘的空間的話它分到4分，flex-basis=200px的意思是它最少也要有50px的空間(寬度) */
+  /* section.right的basis為500px加上section.left的basis為200px，也就是說當我們的視窗被縮到寬度不足700px時就會自動換行(因為有設定wrap) */
+  flex: 4 1 500px;
+}
+
+section.right h3 {
+  font-size: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+p {
+  /* 讓網頁中所有的p標籤都有上下0.5rem左右0rem的padding這樣就不會所有連續p標籤擠在一起 */
+  padding: 0.5rem 0rem;
+}
+
+/* pseudo(偽)-element(元素) */
+/* 偽元素的目的是創造一個在DOM中不存在的元素 */
+/* p::before就是在每個p標籤前面加上"  \00A0\00A0(兩個空白)"，content能識別的空白是\00A0 */
+p::before {
+  content: "\00A0\00A0";
+}
+
+section.right ul {
+  /* 要讓ul往內縮對齊p標籤的文字，所以這裡設定margin-left為1(距離左邊1rem的距離=往右移動1rem) */
+  margin-left: 1rem;
+}
+
+.player {
+  /* 設定margin讓player裡面的資訊與外面距離2rem */
+  margin: 2rem;
+
+  /* 設定padding讓content離border有1rem的距離 */
+  padding: 1rem;
+
+  border: 3px solid rgb(237, 182, 100);
+  /* 讓外框變得有弧度 */
+  border-radius: 20px;
+}
+
+.player h4 {
+  font-size: 1.5rem;
+  color: rgb(62, 147, 147);
+}
+
+.player h5 {
+  font-size: 1rem;
+  color: rgb(46, 192, 192);
+}
+
+/* ====================================================== Japan ===================================================== */
+
+/* 因為這部分要是橫向排列，所以設定div.japan為flex container */
+div.japan {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+/* 設定div.japan裡面的img element為flex-grow為1(有多餘空間的話分到一份)，最少一定要有300px的寬度
+   最多放大也只能放大到60vh
+*/
+div.japan img {
+  flex: 1 1 300px;
+  max-width: 60vh;
+}
+
+/* 設定div.japan裡面class為info的element，flex-grow為3(有多餘空間的話分到3份)，最少一定要有600px的寬度 */
+div.japan .info {
+  flex: 3 1 600px;
+  padding: 2rem;
+}
+
+/* 因為希望下面的文字與圓餅圖能橫向排列，所以設定class為competition的div為flex */
+div.competition {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+/* 設定div.competition裡面class為text的div，它的grow為5(分到多餘空間的5份)，然後basis為300px(最小寬度為300px) */
+div.competition div.text {
+  flex: 5 1 300px;
+  padding: 1rem;
+}
+
+/* 設定id為piechart它的grow為1(分到多餘空間的1份)，然後basis為300px(最小寬度為300px) */
+#piechart {
+  flex: 1 1 300px;
+}
+
+/* 選取class為competition的div標籤裡 class為text的div標籤中的h3標籤 */
+div.competition div.text h3 {
+  font-size: 2rem;
+  color: rgb(62, 147, 147);
+}
+
+/* ====================================================== China ===================================================== */
+
+main section.china h3 {
+  font-size: 2rem;
+  color: rgb(62, 147, 147);
+}
+
+/* 讓表格最少的寬度要有1000px */
+main section.china table {
+  min-width: 1000px;
+}
+
+main section.china table,
+main section.china th,
+main section.china tr,
+main section.china td {
+  border: 2px solid rgb(2, 78, 108);
+  /* 用collapse讓表格共享邊框 */
+  border-collapse: collapse;
+  /* 設定padding讓表格的文字與border不要離那麼近 */
+  padding: 10px;
+}
+
+main section.china table th {
+  background-color: darkcyan;
+  color: rgb(255, 246, 246);
+  /* 因為th預設是粗體字，這裡把它去除 */
+  font-weight: normal;
+}
+
+/* ====================================================== Taiwan ===================================================== */
+
+main section.taiwan h3 {
+  font-size: 2rem;
+  color: rgb(62, 147, 147);
+}
+
+main section.taiwan ul {
+  padding-left: 1rem;
+}
